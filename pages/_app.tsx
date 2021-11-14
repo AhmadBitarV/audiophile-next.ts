@@ -4,6 +4,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import theme from '@styles/theme';
+import { Provider } from 'react-redux';
+import { store } from '@app/store';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -23,7 +25,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </ThemeProvider>
     </>
   );
